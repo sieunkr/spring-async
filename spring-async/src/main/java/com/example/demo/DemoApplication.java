@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @Slf4j
@@ -25,13 +26,32 @@ public class DemoApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) throws ExecutionException, InterruptedException {
 
-        CompletableFuture<Integer> future = coffeeService.getPriceAsync("latte");
-
+        /* test 1
+        coffeeService.order("latte");
         log.info("non blocking : ...");
+         */
 
+        /* test 2
+        CompletableFuture<Integer> future = coffeeService.getPriceAsync("latte");
+        log.info("non blocking : ...");
         log.info("blocking : latte's price is " + future.get());
+         */
 
+        /*
+        CompletableFuture<Integer> future = coffeeService.getPriceAsync("latte");
+        log.info("non blocking 1 : ...");
+        future.thenAccept(p -> log.info("latte's price is : " + p));
+        log.info("non blocking 2 : ...");
+
+         */
+
+        CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithoutAnnotation("latte");
+        log.info("non blocking 1 : ...");
+        future.thenAccept(p -> log.info("latte's price is : " + p));
+        log.info("non blocking 2 : ...");
+
+        
     }
 }
