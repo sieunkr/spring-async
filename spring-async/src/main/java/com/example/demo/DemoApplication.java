@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -47,11 +48,17 @@ public class DemoApplication implements CommandLineRunner {
 
          */
 
+        /*
         CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithoutAnnotation("latte");
         log.info("non blocking 1 : ...");
         future.thenAccept(p -> log.info("latte's price is : " + p));
         log.info("non blocking 2 : ...");
 
-        
+         */
+
+        ListenableFuture<String> future = coffeeService.getPriceAsyncWithListenableFuture("latte");
+        future.addCallback(s -> log.info(s), e-> log.info(e.getMessage()));
+        log.info("non blocking");
+
     }
 }
