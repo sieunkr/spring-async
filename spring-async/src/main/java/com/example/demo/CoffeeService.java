@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -54,6 +55,13 @@ public class CoffeeService {
             log.info("(another thread..) end getPrice..." + name);
             return 1200;
         });
+    }
+
+    @Async
+    public ListenableFuture<String> getPriceAsyncWithListenableFuture(String name) throws InterruptedException {
+
+        Thread.sleep(3000);
+        return new AsyncResult<>("test");
     }
 
 }
