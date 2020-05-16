@@ -29,24 +29,9 @@ public class DemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws ExecutionException, InterruptedException {
 
-        /* test 1
+
         coffeeService.order("latte");
         log.info("non blocking : ...");
-         */
-
-        /* test 2
-        CompletableFuture<Integer> future = coffeeService.getPriceAsync("latte");
-        log.info("non blocking : ...");
-        log.info("blocking : latte's price is " + future.get());
-         */
-
-        /*
-        CompletableFuture<Integer> future = coffeeService.getPriceAsync("latte");
-        log.info("non blocking 1 : ...");
-        future.thenAccept(p -> log.info("latte's price is : " + p));
-        log.info("non blocking 2 : ...");
-
-         */
 
         /*
         CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithoutAnnotation("latte");
@@ -56,9 +41,29 @@ public class DemoApplication implements CommandLineRunner {
 
          */
 
-        ListenableFuture<String> future = coffeeService.getPriceAsyncWithListenableFuture("latte");
-        future.addCallback(s -> log.info(s), e-> log.info(e.getMessage()));
+        /*
+        Future<Integer> future = coffeeService.getPriceAsyncWithFuture("latte");
+        System.out.println("blocking..latte's price is : " + future.get());
+        */
+
+        /*
+        ListenableFuture<Integer> future = coffeeService.getPriceAsyncWithListenableFuture("latte");
+        future.addCallback(s -> log.info("latte's price is :" + s), e-> log.info(e.getMessage()));
         log.info("non blocking");
 
+         */
+
+        /*
+        CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture("latte");
+        log.info("non blocking : ...");
+        log.info("blocking : latte's price is " + future.get());
+         */
+
+        /*
+        CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture("latte");
+        log.info("non blocking 1 : ...");
+        future.thenAccept(p -> log.info("latte's price is : " + p));
+        log.info("non blocking 2 : ...");
+         */
     }
 }
