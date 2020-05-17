@@ -25,8 +25,16 @@ public class Main {
         ));
 
         CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[completableFutures.size()]))
-                .thenAccept(consumer -> completableFutures.forEach(c -> System.out.println(c.join())));
+                .thenAccept(consumer -> {
+                    completableFutures.forEach(c -> {
+                        if (c.join().equals("return coffee:99")) {
+                            System.out.println("last task...");
+                        }
+                    });
+                    System.out.println("completed");
+                });
 
+        System.out.println("non-blocking");
     }
 
 

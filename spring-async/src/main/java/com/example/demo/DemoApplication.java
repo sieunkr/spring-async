@@ -29,9 +29,10 @@ public class DemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws ExecutionException, InterruptedException {
 
-
+        /*
         coffeeService.order("latte");
         log.info("non blocking : ...");
+         */
 
         /*
         CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithoutAnnotation("latte");
@@ -53,11 +54,11 @@ public class DemoApplication implements CommandLineRunner {
 
          */
 
-        /*
+
         CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture("latte");
         log.info("non blocking : ...");
         log.info("blocking : latte's price is " + future.get());
-         */
+        log.info("after blocking...");
 
         /*
         CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture("latte");
