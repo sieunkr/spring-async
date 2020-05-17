@@ -54,17 +54,19 @@ public class DemoApplication implements CommandLineRunner {
 
          */
 
-
+        /*
         CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture("latte");
         log.info("non blocking : ...");
         log.info("blocking : latte's price is " + future.get());
         log.info("after blocking...");
 
-        /*
-        CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture("latte");
+         */
+
+
+        CompletableFuture<Integer> future = coffeeService.getPriceAsyncWithCompletableFuture02("latte");
         log.info("non blocking 1 : ...");
         future.thenAccept(p -> log.info("latte's price is : " + p));
         log.info("non blocking 2 : ...");
-         */
+
     }
 }

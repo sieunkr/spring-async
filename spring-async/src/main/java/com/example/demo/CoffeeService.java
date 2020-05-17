@@ -1,8 +1,10 @@
 package com.example.demo;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
@@ -63,6 +65,22 @@ public class CoffeeService {
 
     @Async
     public CompletableFuture<Integer> getPriceAsyncWithCompletableFuture(String name) {
+
+        try {
+            log.info("start getPrice..." + name);
+            Thread.sleep(3000);
+            log.info("end getPrice..." + name);
+
+        } catch (InterruptedException e) {
+            log.info(e.getMessage());
+        }
+
+        return new AsyncResult<>(1200).completable();
+    }
+
+
+    @Async("myThreadPoolTaskExecutor")
+    public CompletableFuture<Integer> getPriceAsyncWithCompletableFuture02(String name) {
 
         try {
             log.info("start getPrice..." + name);
